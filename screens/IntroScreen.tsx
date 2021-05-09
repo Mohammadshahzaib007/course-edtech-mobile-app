@@ -5,7 +5,7 @@ import Typography from "../UI/Typography";
 const IntroScreen = () => {
   return (
     <View style={styles.screen}>
-      <Typography style={{ fontSize: 40, fontFamily: "rubik-bold" }}>
+      <Typography variant="display3">
         I am Intro Screen
       </Typography>
     </View>

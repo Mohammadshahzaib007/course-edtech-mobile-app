@@ -1,27 +1,78 @@
 import React from "react";
 import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
 
+type VariantTypes =
+  | "display1"
+  | "display2"
+  | "display3"
+  | "heading1"
+  | "heading2"
+  | "paragraphLarge"
+  | "paragraphMedium"
+  | "paragraphSmall"
+  | "buttonLarge"
+  | "buttonMedium"
+  | "buttonSmall";
+
 type propsType = {
   children: React.ReactNode;
   style?: StyleProp<TextStyle>;
-  variant?:
-    | "display1"
-    | "display2"
-    | "display3"
-    | "heading1"
-    | "heading2"
-    | "paragraphLarge"
-    | "paragraphMedium"
-    | "paragraphSmall"
-    | "buttonLarge"
-    | "buttonMedium"
-    | "buttonSmall";
+  variant?: VariantTypes;
 };
 
 const Typography = (props: propsType) => {
-  const { children, style } = props;
+  const { children, style, variant } = props;
 
-  return <Text style={style}>{children}</Text>;
+  let variantStyle = {};
+
+  switch (variant) {
+    case "display1":
+      variantStyle = styles.display1;
+      break;
+
+    case "display2":
+      variantStyle = styles.display2;
+      break;
+
+    case "display3":
+      variantStyle = styles.display3;
+      break;
+
+    case "heading1":
+      variantStyle = styles.heading1;
+      break;
+
+    case "heading2":
+      variantStyle = styles.heading2;
+      break;
+
+    case "paragraphLarge":
+      variantStyle = styles.paragraphLarge;
+      break;
+
+    case "paragraphMedium":
+      variantStyle = styles.paragraphMedium;
+      break;
+
+    case "paragraphSmall":
+      variantStyle = styles.paragraphSmall;
+      break;
+
+    case "buttonLarge":
+      variantStyle = styles.buttonLarge;
+
+    case "buttonMedium":
+      variantStyle = styles.buttonMedium;
+
+    case "buttonSmall":
+      variantStyle = styles.buttonSmall;
+  }
+
+  return (
+    <Text style={{ ...styles.common, ...variantStyle, ...(style as Object) }}>
+      {children}
+    </Text>
+  );
 };
 
 export default Typography;

@@ -42,7 +42,7 @@ export default function App() {
             headerTintColor: "#3C3A36",
             headerTitleStyle: {
               alignSelf: "flex-end",
-              fontFamily: "rubika-medium",
+              fontFamily: "rubik-medium",
               fontSize: 14,
             },
           }}
