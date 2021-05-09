@@ -10,9 +10,9 @@ import AppLoading from "expo-app-loading";
 
 const fetchFonts = async () => {
   Font.loadAsync({
-    "rubik-regular": require("./assets/fonts/Rubik-Regular.ttf"),
-    "rubik-medium": require("./assets/fonts/Rubik-Medium.ttf"),
-    "rubik-bold": require("./assets/fonts/Rubik-Bold.ttf"),
+    "rubik-regular": require("./assets/fonts/Rubik-Regular.ttf"), // font-weiht: 400
+    "rubik-medium": require("./assets/fonts/Rubik-Medium.ttf"), // font-weiht: 500
+    "rubik-bold": require("./assets/fonts/Rubik-Bold.ttf"), // font-weiht: 700
   });
 };
 
@@ -36,7 +36,16 @@ export default function App() {
       <stack.Navigator>
         <stack.Screen
           name="Intro"
-          options={{ title: "Skip" }}
+          options={{
+            title: "Skip",
+            headerStyle: { backgroundColor: "#fff", elevation: 0 },
+            headerTintColor: "#3C3A36",
+            headerTitleStyle: {
+              alignSelf: "flex-end",
+              fontFamily: "rubika-medium",
+              fontSize: 14,
+            },
+          }}
           component={IntroScreen}
         />
       </stack.Navigator>

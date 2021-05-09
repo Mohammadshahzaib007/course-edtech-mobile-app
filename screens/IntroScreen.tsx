@@ -1,16 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Typography from "../UI/Typography";
 
 const IntroScreen = () => {
   return (
-    <View>
-      <Text style={{ fontSize: 40, fontFamily: "rubik-bold" }}>
+    <View style={styles.screen}>
+      <Typography style={{ fontSize: 40, fontFamily: "rubik-bold" }}>
         I am Intro Screen
-      </Text>
+      </Typography>
     </View>
   );
 };
 
 export default IntroScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: "#fff",
+    flex: 1,
+  },
+});
