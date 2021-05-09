@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import Typography from "../UI/Typography";
+import { StyleSheet, View, Image } from "react-native";
+import Typography from "./UI/Typography";
 
 type PropsType = {
   heading: string;

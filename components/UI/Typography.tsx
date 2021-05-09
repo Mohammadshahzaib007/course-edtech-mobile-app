@@ -10,9 +10,9 @@ type VariantTypes =
   | "paragraphLarge"
   | "paragraphMedium"
   | "paragraphSmall"
-  | "buttonLarge"
-  | "buttonMedium"
-  | "buttonSmall";
+  | "buttonLargeText"
+  | "buttonMediumText"
+  | "buttonSmallText";
 
 type propsType = {
   children: React.ReactNode;
@@ -58,13 +58,13 @@ const Typography = (props: propsType) => {
       variantStyle = styles.paragraphSmall;
       break;
 
-    case "buttonLarge":
+    case "buttonLargeText":
       variantStyle = styles.buttonLarge;
 
-    case "buttonMedium":
+    case "buttonMediumText":
       variantStyle = styles.buttonMedium;
 
-    case "buttonSmall":
+    case "buttonSmallText":
       variantStyle = styles.buttonSmall;
   }
 
