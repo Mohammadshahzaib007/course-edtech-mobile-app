@@ -26,92 +26,89 @@ const Typography = (props: propsType) => {
 
 export default Typography;
 
+const commonDisplayStyles = {
+  fontFamily: "rubik-bold",
+  letterSpacing: -1,
+};
+
+const commonHeadingStyles = {
+  fontFamily: "rubik-medium",
+  letterSpacing: -0.5,
+};
+
+const commonParagraphyStyles = {
+  fontFamily: "rubik-regular",
+  letterSpacing: -0.5,
+};
+
 const styles = StyleSheet.create({
+  common: {
+    color: "#10182B",
+  },
+
   display1: {
-    fontFamily: "rubik-bold",
+    ...commonDisplayStyles,
     fontSize: 56,
     lineHeight: 58.8,
-    letterSpacing: -1,
-    color: "#10182B",
   },
 
   display2: {
-    fontFamily: "rubik-bold",
+    ...commonDisplayStyles,
     fontSize: 40,
     lineHeight: 46,
-    letterSpacing: -1,
-    color: "#10182B",
   },
 
   display3: {
-    fontFamily: "rubik-bold",
+    ...commonDisplayStyles,
     fontSize: 32,
     lineHeight: 42,
-    letterSpacing: -1,
-    color: "#10182B",
   },
 
   heading1: {
-    fontFamily: "rubik-medium",
+    ...commonHeadingStyles,
     fontSize: 24,
     lineHeight: 32,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   heading2: {
-    fontFamily: "rubik-medium",
+    ...commonHeadingStyles,
     fontSize: 20,
     lineHeight: 26,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   paragraphLarge: {
-    fontFamily: "rubik-regular",
+    ...commonParagraphyStyles,
     fontSize: 16,
     lineHeight: 26,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   paragraphMedium: {
-    fontFamily: "rubik-regular",
+    ...commonParagraphyStyles,
     fontSize: 14,
     lineHeight: 21,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   paragraphSmall: {
-    fontFamily: "rubik-regular",
+    ...commonParagraphyStyles,
     fontSize: 12,
     lineHeight: 18,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   buttonLarge: {
-    fontFamily: "rubik-medium",
+    ...commonHeadingStyles,
     fontSize: 18,
     lineHeight: 22,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   buttonMedium: {
-    fontFamily: "rubik-medium",
+    ...commonHeadingStyles,
     fontSize: 16,
     lineHeight: 18,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 
   buttonSmall: {
-    fontFamily: "rubik-medium",
+    ...commonHeadingStyles,
     fontSize: 14,
     lineHeight: 16,
-    letterSpacing: -0.5,
-    color: "#10182B",
   },
 });
