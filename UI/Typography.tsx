@@ -51,19 +51,67 @@ const styles = StyleSheet.create({
     color: "#10182B",
   },
 
-  heading1: {},
+  heading1: {
+    fontFamily: "rubik-medium",
+    fontSize: 24,
+    lineHeight: 32,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  heading2: {},
+  heading2: {
+    fontFamily: "rubik-medium",
+    fontSize: 20,
+    lineHeight: 26,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  paragraphLarge: {},
+  paragraphLarge: {
+    fontFamily: "rubik-regular",
+    fontSize: 16,
+    lineHeight: 26,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  paragraphMedium: {},
+  paragraphMedium: {
+    fontFamily: "rubik-regular",
+    fontSize: 14,
+    lineHeight: 21,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  paragraphSmall: {},
+  paragraphSmall: {
+    fontFamily: "rubik-regular",
+    fontSize: 12,
+    lineHeight: 18,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  buttonLarge: {},
+  buttonLarge: {
+    fontFamily: "rubik-medium",
+    fontSize: 18,
+    lineHeight: 22,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  buttonMedium: {},
+  buttonMedium: {
+    fontFamily: "rubik-medium",
+    fontSize: 16,
+    lineHeight: 18,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 
-  buttonSmall: {},
+  buttonSmall: {
+    fontFamily: "rubik-medium",
+    fontSize: 14,
+    lineHeight: 16,
+    letterSpacing: -0.5,
+    color: "#10182B",
+  },
 });
