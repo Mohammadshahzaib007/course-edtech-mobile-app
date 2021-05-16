@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   Text,
@@ -15,14 +16,15 @@ type PropsType = {
   children: React.ReactNode;
   variant: "buttonLargeText" | "buttonMediumText" | "buttonSmallText";
   style?: StyleProp<TextStyle>;
+  onPress?: ((event: GestureResponderEvent) => void) | undefined
 };
 
 const CustomButton = (props: PropsType) => {
-  const { children, variant } = props;
+  const { children, variant, onPress } = props;
 
   return (
     <View style={{ overflow: "hidden", borderRadius: 16 }}>
-      <TouchableNativeFeedback>
+      <TouchableNativeFeedback onPress={onPress}>
         <View style={styles.btn}>
           <Typography variant={variant} style={{ color: "#fff" }}>
             {children}
