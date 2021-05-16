@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Image, Dimensions, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import SignupPng from "../assets/signup.png";
@@ -8,6 +8,8 @@ import CustomButton from "../components/UI/CustomButton";
 import CustomTextInput from "../components/UI/CustomTextInput";
 import DismissKeyboard from "../components/DismissKeyboard";
 import { useNavigation } from "@react-navigation/core";
+import IconButton from "../components/UI/IconButton";
+import { Ionicons } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -17,6 +19,13 @@ const Signup = () => {
   return (
     <DismissKeyboard>
       <SafeAreaView style={styles.screen}>
+        {/* back button */}
+        <View style={{ alignSelf: "flex-start", marginLeft: 16 }}>
+          <IconButton onPress={() => navigation.navigate("Login")}>
+            <Ionicons name="chevron-back" size={17} color="black" />
+          </IconButton>
+        </View>
+
         <View>
           {/* img */}
           <Image style={styles.img} source={SignupPng} />

@@ -3,45 +3,42 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
+  Text,
   TouchableNativeFeedback,
   View,
   ViewStyle,
 } from "react-native";
-import Typography from "./Typography";
-
-import Color from "../../constants/colors";
 
 type PropsType = {
   children: React.ReactNode;
-  variant: "buttonLargeText" | "buttonMediumText" | "buttonSmallText";
+
   style?: StyleProp<ViewStyle>;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 };
 
-const CustomButton = (props: PropsType) => {
-  const { children, variant, onPress, style } = props;
+const IconButton = (props: PropsType) => {
+  const { children, onPress, style } = props;
 
   return (
-    <View style={{ overflow: "hidden", borderRadius: 16 }}>
+    <View style={{ overflow: "hidden", borderRadius: 50 }}>
       <TouchableNativeFeedback onPress={onPress}>
         <View style={{ ...styles.btn, ...(style as Object) }}>
-          <Typography variant={variant} style={{ color: "#fff" }}>
-            {children}
-          </Typography>
+          {children}
         </View>
       </TouchableNativeFeedback>
     </View>
   );
 };
 
-export default CustomButton;
+export default IconButton;
 
 const styles = StyleSheet.create({
   btn: {
-    // width: 311,
-    height: 56,
-    backgroundColor: Color.primary,
-    borderRadius: 16,
+    width: 48,
+    height: 48,
+    borderWidth: 1,
+    borderColor: "#BEBAB3",
+    borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
   },
