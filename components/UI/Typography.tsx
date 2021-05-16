@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle, View } from "react-native";
 
 type VariantTypes =
   | "display1"
@@ -14,7 +14,7 @@ type VariantTypes =
   | "buttonMediumText"
   | "buttonSmallText";
 
-type propsType = {
+interface propsType extends TextProps {
   children: React.ReactNode;
   style?: StyleProp<TextStyle>;
   variant?: VariantTypes;
@@ -69,7 +69,7 @@ const Typography = (props: propsType) => {
   }
 
   return (
-    <Text style={{ ...styles.common, ...variantStyle, ...(style as Object) }}>
+    <Text {...props} style={{ ...styles.common, ...variantStyle, ...(style as Object) }}>
       {children}
     </Text>
   );

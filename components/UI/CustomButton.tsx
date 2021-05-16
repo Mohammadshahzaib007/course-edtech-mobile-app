@@ -39,7 +39,7 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   btn: {
-    width: 311,
+    // width: 311,
     height: 56,
     backgroundColor: Color.primary,
     borderRadius: 16,

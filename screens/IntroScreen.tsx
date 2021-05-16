@@ -59,7 +59,7 @@ const IntroScreen = (props: PropsType) => {
       </View>
 
       {/* button container */}
-      <View style={{ marginTop: "auto", marginBottom: 30 }}>
+      <View style={{ marginTop: "auto", marginBottom: 30, width: 311 }}>
         <CustomButton
           variant="buttonMediumText"
           onPress={
