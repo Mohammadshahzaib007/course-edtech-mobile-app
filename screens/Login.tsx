@@ -1,19 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Image, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+
 import { FontAwesome } from "@expo/vector-icons";
 
 import LoginPng from "../assets/login.png";
 import Typography from "../components/UI/Typography";
 import CustomButton from "../components/UI/CustomButton";
-import { TextInput } from "react-native-gesture-handler";
 import CustomTextInput from "../components/UI/CustomTextInput";
 import DismissKeyboard from "../components/DismissKeyboard";
+import { useNavigation } from "@react-navigation/core";
 
 const windowWidth = Dimensions.get("window").width;
 
 const Login = () => {
+
+  const navigation = useNavigation()
+
   return (
     <DismissKeyboard>
       <SafeAreaView style={styles.screen}>
@@ -65,6 +68,14 @@ const Login = () => {
             <CustomButton variant="buttonMediumText" style={{ width: "100%" }}>
               Log in
             </CustomButton>
+
+            <Typography
+              variant="buttonSmallText"
+              style={{ textAlign: "center", marginTop: 16 }}
+              onPress={() => navigation.navigate("Signup")}
+            >
+              Sign up
+            </Typography>
           </View>
         </View>
       </SafeAreaView>

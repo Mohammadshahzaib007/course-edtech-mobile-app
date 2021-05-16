@@ -20,12 +20,12 @@ type PropsType = {
 };
 
 const CustomButton = (props: PropsType) => {
-  const { children, variant, onPress } = props;
+  const { children, variant, onPress, style } = props;
 
   return (
     <View style={{ overflow: "hidden", borderRadius: 16 }}>
       <TouchableNativeFeedback onPress={onPress}>
-        <View style={styles.btn}>
+        <View style={{...styles.btn, ...(style as Object)}}>
           <Typography variant={variant} style={{ color: "#fff" }}>
             {children}
           </Typography>
