@@ -1,16 +1,19 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import CustomButton from "../components/UI/CustomButton";
 import Indicator from "../components/UI/Indicator";
 import WelcomScreenCard from "../components/WelcomScreenCard";
 
-type propsType = {
+interface PropsType {
   step: number;
   goToNextHandler: () => void;
-};
+}
 
-const IntroScreen = (props: propsType) => {
+const IntroScreen = (props: PropsType) => {
   const { step, goToNextHandler } = props;
+
+  const navigation = useNavigation();
 
   const itemToBeShown = () => {
     switch (step) {
@@ -59,7 +62,9 @@ const IntroScreen = (props: propsType) => {
       <View style={{ marginTop: "auto", marginBottom: 30 }}>
         <CustomButton
           variant="buttonMediumText"
-          onPress={step !== 3 ? goToNextHandler : () => {}}
+          onPress={
+            step !== 3 ? goToNextHandler : () => navigation.navigate("Login")
+          }
         >
           {step !== 3 ? "Next" : "Let’s Start"}
         </CustomButton>

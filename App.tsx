@@ -7,6 +7,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import Login from "./screens/Login";
+import Signup from "./screens/Signup";
 
 const fetchFonts = async () => {
   return Font.loadAsync({
@@ -41,18 +43,26 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <stack.Navigator>
+      <stack.Navigator
+        // common screen  configirations (styles)
+        screenOptions={{
+          headerLeft: () => null,
+          headerShown: false,
+          headerStyle: { backgroundColor: "#fff", elevation: 0 },
+          headerTintColor: "#3C3A36",
+          headerTitleStyle: {
+            alignSelf: "flex-end",
+            fontFamily: "rubik-medium",
+            fontSize: 14,
+          },
+        }}
+      >
+        {/* Onboarding screen */}
         <stack.Screen
           name="Intro"
           options={{
             title: step !== 3 ? "Skip" : "",
-            headerStyle: { backgroundColor: "#fff", elevation: 0 },
-            headerTintColor: "#3C3A36",
-            headerTitleStyle: {
-              alignSelf: "flex-end",
-              fontFamily: "rubik-medium",
-              fontSize: 14,
-            },
+            headerShown: true
           }}
         >
           {(props) => (
@@ -63,6 +73,10 @@ export default function App() {
             />
           )}
         </stack.Screen>
+
+        {/* Auth screens */}
+        <stack.Screen name="Login" component={Login} />
+        <stack.Screen name="Signup" component={Signup} />
       </stack.Navigator>
     </NavigationContainer>
   );
