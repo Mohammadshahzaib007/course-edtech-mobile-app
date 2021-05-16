@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View, Image, Dimensions, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import SignupPng from "../assets/signup.png";
 import Typography from "../components/UI/Typography";
 import CustomButton from "../components/UI/CustomButton";
 import CustomTextInput from "../components/UI/CustomTextInput";
@@ -28,7 +27,7 @@ const Signup = () => {
 
         <View>
           {/* img */}
-          <Image style={styles.img} source={SignupPng} />
+          <Image style={styles.img} source={require("../assets/signup.png")} />
 
           {/* text container */}
           <View style={styles.textContainer}>

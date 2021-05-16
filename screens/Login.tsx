@@ -4,12 +4,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FontAwesome } from "@expo/vector-icons";
 
-import LoginPng from "../assets/login.png";
+
 import Typography from "../components/UI/Typography";
 import CustomButton from "../components/UI/CustomButton";
 import CustomTextInput from "../components/UI/CustomTextInput";
 import DismissKeyboard from "../components/DismissKeyboard";
 import { useNavigation } from "@react-navigation/core";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -17,12 +18,22 @@ const Login = () => {
 
   const navigation = useNavigation()
 
+  const removeLocalStorage = async () => {
+    try {
+      await AsyncStorage.removeItem('@viewedOnboarding')
+      console.log('removed')
+    } catch (error) {
+      console.log('Error removing', error)
+    }
+  }  
+
   return (
     <DismissKeyboard>
       <SafeAreaView style={styles.screen}>
+       
         <View>
           {/* img */}
-          <Image style={styles.img} source={LoginPng} />
+          <Image style={styles.img} source={require('../assets/login.png')} />
 
           {/* text container */}
           <View style={styles.textContainer}>
@@ -65,7 +76,7 @@ const Login = () => {
               Forgot Password?
             </Typography>
 
-            <CustomButton variant="buttonMediumText" style={{ width: "100%" }}>
+            <CustomButton variant="buttonMediumText" onPress={removeLocalStorage} style={{ width: "100%" }}>
               Log in
             </CustomButton>
 

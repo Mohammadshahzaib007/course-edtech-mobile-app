@@ -63,7 +63,7 @@ const IntroScreen = (props: PropsType) => {
         <CustomButton
           variant="buttonMediumText"
           onPress={
-            step !== 3 ? goToNextHandler : () => navigation.navigate("Signup")
+            step !== 3 ? goToNextHandler : () => navigation.navigate("Login")
           }
         >
           {step !== 3 ? "Next" : "Let’s Start"}
