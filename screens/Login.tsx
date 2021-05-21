@@ -52,6 +52,7 @@ const Login = () => {
 
   const loginHandler = () => {
     console.log("Login credentials", state);
+    navigation.navigate('Home')
   };
 
   return (

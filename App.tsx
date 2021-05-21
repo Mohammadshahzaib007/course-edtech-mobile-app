@@ -9,6 +9,7 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+import HomeScree from "./screens/HomeScree";
 
 const fetchFonts = async () => {
   return Font.loadAsync({
@@ -62,7 +63,7 @@ export default function App() {
           name="Intro"
           options={{
             title: step !== 3 ? "Skip" : "",
-            headerShown: true
+            headerShown: true,
           }}
         >
           {(props) => (
@@ -77,6 +78,7 @@ export default function App() {
         {/* Auth screens */}
         <stack.Screen name="Login" component={Login} />
         <stack.Screen name="Signup" component={Signup} />
+        <stack.Screen name="Home" component={HomeScree} />
       </stack.Navigator>
     </NavigationContainer>
   );
