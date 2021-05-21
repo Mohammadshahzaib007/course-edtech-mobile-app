@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { StyleSheet, View, Image, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FontAwesome } from "@expo/vector-icons";
-
 
 import Typography from "../components/UI/Typography";
 import CustomButton from "../components/UI/CustomButton";
@@ -11,29 +10,56 @@ import CustomTextInput from "../components/UI/CustomTextInput";
 import DismissKeyboard from "../components/DismissKeyboard";
 import { useNavigation } from "@react-navigation/core";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  LoginState as State,
+  SET_EMAIL,
+  SET_NAME,
+  SET_PASSWORD,
+  SignupLocalAction as Action,
+} from "../types/State";
 
 const windowWidth = Dimensions.get("window").width;
 
+const initialState: State = {
+  password: "",
+  email: "",
+};
+
+// reducer function
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case SET_PASSWORD:
+      return {
+        ...state,
+        password: action.payload,
+      };
+
+    case SET_EMAIL:
+      return {
+        ...state,
+        email: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
 const Login = () => {
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const removeLocalStorage = async () => {
-    try {
-      await AsyncStorage.removeItem('@viewedOnboarding')
-      console.log('removed')
-    } catch (error) {
-      console.log('Error removing', error)
-    }
-  }  
+  const loginHandler = () => {
+    console.log("Login credentials", state);
+  };
 
   return (
     <DismissKeyboard>
       <SafeAreaView style={styles.screen}>
-       
         <View>
           {/* img */}
-          <Image style={styles.img} source={require('../assets/login.png')} />
+          <Image style={styles.img} source={require("../assets/login.png")} />
 
           {/* text container */}
           <View style={styles.textContainer}>
@@ -61,11 +87,23 @@ const Login = () => {
           </View>
 
           <View style={{ width: windowWidth * 0.91 }}>
-            <CustomTextInput placeholder="Email" />
+            <CustomTextInput
+              placeholder="Email"
+              textContentType="emailAddress"
+              onChangeText={(value) =>
+                dispatch({ type: SET_EMAIL, payload: value })
+              }
+              value={state.email}
+            />
 
             <CustomTextInput
               placeholder="Password"
+              textContentType="password"
               style={{ marginVertical: 16 }}
+              onChangeText={(value) =>
+                dispatch({ type: SET_PASSWORD, payload: value })
+              }
+              value={state.password}
             />
 
             <Typography
@@ -76,7 +114,11 @@ const Login = () => {
               Forgot Password?
             </Typography>
 
-            <CustomButton variant="buttonMediumText" onPress={removeLocalStorage} style={{ width: "100%" }}>
+            <CustomButton
+              onPress={loginHandler}
+              variant="buttonMediumText"
+              style={{ width: "100%" }}
+            >
               Log in
             </CustomButton>
 

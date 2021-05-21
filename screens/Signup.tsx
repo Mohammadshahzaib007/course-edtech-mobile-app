@@ -10,32 +10,21 @@ import { useNavigation } from "@react-navigation/core";
 import IconButton from "../components/UI/IconButton";
 import { Ionicons } from "@expo/vector-icons";
 
+import {
+  SignupState as State,
+  SignupLocalAction as Action,
+  SET_EMAIL,
+  SET_NAME,
+  SET_PASSWORD,
+} from "../types/State";
+
 const windowWidth = Dimensions.get("window").width;
 
-// Action type for dispatch function
-const SET_NAME = "SET_NAME";
-const SET_EMAIL = "SET_EMAIL";
-const SET_PASSWORD = "SET_PASSWORD";
-
-// state type
-interface State {
-  name: string;
-  email: string;
-  password: string;
-}
-
-// initial state
 const initialState: State = {
   name: "",
   email: "",
   password: "",
 };
-
-// action types
-interface Action {
-  type: string;
-  payload: string;
-}
 
 // reducer function
 const reducer = (state: State, action: Action): State => {
@@ -70,7 +59,7 @@ const Signup = () => {
 
   // signup handler
   const signupHandler = () => {
-    console.log(state);
+    console.log("signup credentials", state);
   };
 
   return (
@@ -106,18 +95,23 @@ const Signup = () => {
               onChangeText={(value) =>
                 dispatch({ type: SET_NAME, payload: value })
               }
+              value={state.name}
             />
 
             <CustomTextInput
               placeholder="Email"
+              textContentType="emailAddress"
               style={{ marginVertical: 16 }}
               onChangeText={(value) =>
                 dispatch({ type: SET_EMAIL, payload: value })
               }
+              value={state.email}
             />
 
             <CustomTextInput
               placeholder="Password"
+              textContentType="password"
+              value={state.password}
               onChangeText={(value) =>
                 dispatch({ type: SET_PASSWORD, payload: value })
               }
