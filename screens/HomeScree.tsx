@@ -11,6 +11,7 @@ import IconButton from "../components/UI/IconButton";
 import Typography from "../components/UI/Typography";
 import { Fontisto } from "@expo/vector-icons";
 import Filter from "../components/Filter";
+import CourseCard from "../components/UI/CourseCard";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -40,6 +41,11 @@ const HomeScreen = () => {
             filterName="Categiroy"
             options={["CSS", "UX", "Swift", "UI"]}
           />
+        </View>
+
+        {/* content container */}
+        <View style={{ width: "100%", marginTop: 16 }}>
+          <CourseCard />
         </View>
       </View>
     </SafeAreaView>
