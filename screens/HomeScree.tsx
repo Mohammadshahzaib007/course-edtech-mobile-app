@@ -17,44 +17,71 @@ const DEVICE_WIDTH = Dimensions.get("window").width;
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView style={styles.screen}>
-      <View style={styles.container}>
-        {/* header/top section */}
-        <View style={styles.header}>
-          {/* text container */}
-          <View>
-            <Typography variant="paragraphLarge">Hello,</Typography>
-            <Typography variant="display3" numberOfLines={1}>
-              Juana Antonieta
-            </Typography>
+    <ScrollView>
+      <SafeAreaView style={styles.screen}>
+        <View style={styles.container}>
+          {/* header/top section */}
+          <View style={styles.header}>
+            {/* text container */}
+            <View>
+              <Typography variant="paragraphLarge">Hello,</Typography>
+              <Typography variant="display3" numberOfLines={1}>
+                Juana Antonieta
+              </Typography>
+            </View>
+
+            {/* button container */}
+            <View>
+              <IconButton>
+                <Fontisto name="bell" size={24} color="black" />
+              </IconButton>
+            </View>
           </View>
 
-          {/* button container */}
-          <View>
-            <IconButton>
-              <Fontisto name="bell" size={24} color="black" />
-            </IconButton>
+          {/* filter */}
+          <View style={{ width: "100%" }}>
+            <Filter
+              filterName="Categiroy"
+              options={["CSS", "UX", "Swift", "UI"]}
+            />
+          </View>
+
+          {/* content container */}
+          <View style={{ width: "100%", marginTop: 24 }}>
+            <CourseCard
+              courseDuration="3 h 30 min"
+              courseTitle="UI Advanced"
+              courseDescription="Advanced mobile interface design"
+            />
+            <CourseCard
+              courseDuration="3 h 30 min"
+              courseTitle="UI Advanced"
+              courseDescription="Advanced mobile interface design"
+            />
+            <CourseCard
+              courseDuration="3 h 30 min"
+              courseTitle="UI Advanced"
+              courseDescription="Advanced mobile interface design"
+            />
+            <CourseCard
+              courseDuration="3 h 30 min"
+              courseTitle="UI Advanced"
+              courseDescription="Advanced mobile interface design"
+            />
+            <CourseCard
+              courseDuration="3 h 30 min"
+              courseTitle="UI Advanced"
+              courseDescription="Advanced mobile interface design"
+            />
+            <CourseCard
+              courseDuration="3 h 30 min"
+              courseTitle="UI Advanced"
+              courseDescription="Advanced mobile interface design"
+            />
           </View>
         </View>
-
-        {/* filter */}
-        <View style={{ width: "100%" }}>
-          <Filter
-            filterName="Categiroy"
-            options={["CSS", "UX", "Swift", "UI"]}
-          />
-        </View>
-
-        {/* content container */}
-        <View style={{ width: "100%", marginTop: 16 }}>
-          <CourseCard
-            courseDuration="3 h 30 min"
-            courseTitle="UI Advanced"
-            courseDescription="Advanced mobile interface design"
-          />
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 

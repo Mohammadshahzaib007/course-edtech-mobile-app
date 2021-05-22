@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#BEBAB3",
     overflow: "hidden",
+    marginBottom: 24
   },
 
   bgImage: {
