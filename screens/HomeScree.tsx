@@ -33,10 +33,11 @@ const HomeScreen = () => {
             </IconButton>
           </View>
         </View>
-      </View>
 
-      <View>
-        <Filter />
+        {/* filter */}
+        <View style={{ width: "100%" }}>
+          <Filter filterName="Categiroy" options={["CSS", "UX", "Swift", "UI", "test1", 'test2', 'shahzaib']} />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 8,
-    marginBottom: 80
+    marginTop: 16,
+    marginBottom: 80,
   },
 });
