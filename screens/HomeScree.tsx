@@ -24,7 +24,9 @@ const HomeScreen = () => {
           {/* text container */}
           <View>
             <Typography variant="paragraphLarge">Hello,</Typography>
-            <Typography variant="display3">Juana Antonieta</Typography>
+            <Typography variant="display3" numberOfLines={1}>
+              Juana Antonieta
+            </Typography>
           </View>
 
           {/* button container */}

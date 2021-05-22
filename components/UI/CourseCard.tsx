@@ -23,7 +23,7 @@ const CourseCard = (props: PropsType) => {
       <TouchableNativeFeedback>
         <View style={styles.cardContainer}>
           <ImageBackground
-            source={{ uri: "https://picsum.photos/200/300?grayscale" }}
+            source={{ uri: "https://picsum.photos/300/300?grayscale" }}
             style={styles.bgImage}
             resizeMode="cover"
           >
@@ -31,15 +31,16 @@ const CourseCard = (props: PropsType) => {
           </ImageBackground>
           <View style={styles.contentContainer}>
             <Typography
+              numberOfLines={1}
               variant="paragraphSmall"
               style={{ color: "#5BA092", marginBottom: 4 }}
             >
               {courseDuration}
             </Typography>
-            <Typography variant="heading1" style={{ marginBottom: 4 }}>
+            <Typography numberOfLines={1} variant="heading1" style={{ marginBottom: 4 }}>
               {courseTitle}
             </Typography>
-            <Typography variant="paragraphMedium">
+            <Typography numberOfLines={2} variant="paragraphMedium">
               {courseDescription}
             </Typography>
           </View>
@@ -54,7 +55,7 @@ export default CourseCard;
 const styles = StyleSheet.create({
   cardContainer: {
     // minWidth: 343,
-    height: 297,
+    minHeight: 297,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#BEBAB3",
