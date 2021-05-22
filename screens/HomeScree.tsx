@@ -10,6 +10,7 @@ import {
 import IconButton from "../components/UI/IconButton";
 import Typography from "../components/UI/Typography";
 import { Fontisto } from "@expo/vector-icons";
+import Filter from "../components/Filter";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -33,6 +34,10 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
+
+      <View>
+        <Filter />
+      </View>
     </SafeAreaView>
   );
 };
@@ -44,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingVertical: 22,
+    paddingVertical: 25,
   },
   container: {
     width: DEVICE_WIDTH * 0.91466,
@@ -53,7 +58,8 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: 'center',
-    marginTop: 8
+    alignItems: "center",
+    marginTop: 8,
+    marginBottom: 80
   },
 });
