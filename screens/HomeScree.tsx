@@ -2,20 +2,21 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const HomeScree = () => {
+const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.screen}>
-      <Text>Home Scree</Text>
+      <Text>Home Screen</Text>
     </SafeAreaView>
   );
 };
 
-export default HomeScree;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#fff'
   },
 });

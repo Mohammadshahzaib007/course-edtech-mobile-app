@@ -6,6 +6,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import AuthScreen from "./navigation/Auth";
+import Home from "./navigation/Home";
+import HomeStacks from "./navigation/Home";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const fetchFonts = async () => {
   return Font.loadAsync({
@@ -14,6 +17,8 @@ const fetchFonts = async () => {
     "rubik-bold": require("./assets/fonts/Rubik-Bold.ttf"), // font-weiht: 700
   });
 };
+
+const RootStack = createStackNavigator();
 
 //Component
 export default function App() {
@@ -39,7 +44,22 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <AuthScreen step={step} goToNextHandler={goToNextHandler} />
+      <RootStack.Navigator headerMode="none">
+        <RootStack.Screen name="Auth">
+          {(props) => (
+            <AuthScreen
+              {...props}
+              step={step}
+              goToNextHandler={goToNextHandler}
+            />
+          )}
+        </RootStack.Screen>
+        <RootStack.Screen
+          name="Home"
+          options={{ title: "App", headerShown: false }}
+          component={HomeStacks}
+        />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }
