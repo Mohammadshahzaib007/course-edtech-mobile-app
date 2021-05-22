@@ -36,7 +36,10 @@ const HomeScreen = () => {
 
         {/* filter */}
         <View style={{ width: "100%" }}>
-          <Filter filterName="Categiroy" options={["CSS", "UX", "Swift", "UI", "test1", 'test2', 'shahzaib']} />
+          <Filter
+            filterName="Categiroy"
+            options={["CSS", "UX", "Swift", "UI"]}
+          />
         </View>
       </View>
     </SafeAreaView>

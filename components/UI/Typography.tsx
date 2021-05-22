@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
 
   paragraphSmall: {
     ...commonParagraphyStyles,
+    fontFamily: "rubik-medium",
     fontSize: 12,
     lineHeight: 18,
   },
