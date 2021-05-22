@@ -45,7 +45,11 @@ const HomeScreen = () => {
 
         {/* content container */}
         <View style={{ width: "100%", marginTop: 16 }}>
-          <CourseCard />
+          <CourseCard
+            courseDuration="3 h 30 min"
+            courseTitle="UI Advanced"
+            courseDescription="Advanced mobile interface design"
+          />
         </View>
       </View>
     </SafeAreaView>
