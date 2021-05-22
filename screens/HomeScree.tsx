@@ -12,6 +12,7 @@ import Typography from "../components/UI/Typography";
 import { Fontisto } from "@expo/vector-icons";
 import Filter from "../components/Filter";
 import CourseCard from "../components/UI/CourseCard";
+import SearchBox from "../components/UI/SearchBox";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -36,6 +37,11 @@ const HomeScreen = () => {
                 <Fontisto name="bell" size={24} color="black" />
               </IconButton>
             </View>
+          </View>
+
+          {/* search box container */}
+          <View style={{ width: "100%", paddingVertical: 16 }}>
+            <SearchBox />
           </View>
 
           {/* filter */}
@@ -103,6 +109,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 16,
-    marginBottom: 80,
+    // marginBottom: 80,
   },
 });
