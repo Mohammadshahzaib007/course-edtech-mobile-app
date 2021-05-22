@@ -66,9 +66,7 @@ const Signup = () => {
     <DismissKeyboard>
       <SafeAreaView style={styles.screen}>
         {/* back button */}
-        <View
-          style={{ alignSelf: "flex-start", marginLeft: 16, marginTop: -25 }}
-        >
+        <View style={{ alignSelf: "flex-start", marginLeft: 16 }}>
           <IconButton onPress={() => navigation.navigate("Login")}>
             <Ionicons name="chevron-back" size={17} color="black" />
           </IconButton>

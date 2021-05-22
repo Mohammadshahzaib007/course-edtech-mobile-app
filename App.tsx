@@ -1,15 +1,11 @@
 import "react-native-gesture-handler";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import IntroScreen from "./screens/IntroScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
-import Login from "./screens/Login";
-import Signup from "./screens/Signup";
-import HomeScree from "./screens/HomeScree";
+import AuthScreen from "./navigation/Auth";
 
 const fetchFonts = async () => {
   return Font.loadAsync({
@@ -19,8 +15,7 @@ const fetchFonts = async () => {
   });
 };
 
-const stack = createStackNavigator();
-
+//Component
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -44,42 +39,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <stack.Navigator
-        // common screen  configirations (styles)
-        screenOptions={{
-          headerLeft: () => null,
-          headerShown: false,
-          headerStyle: { backgroundColor: "#fff", elevation: 0 },
-          headerTintColor: "#3C3A36",
-          headerTitleStyle: {
-            alignSelf: "flex-end",
-            fontFamily: "rubik-medium",
-            fontSize: 14,
-          },
-        }}
-      >
-        {/* Onboarding screen */}
-        <stack.Screen
-          name="Intro"
-          options={{
-            title: step !== 3 ? "Skip" : "",
-            headerShown: true,
-          }}
-        >
-          {(props) => (
-            <IntroScreen
-              {...props}
-              step={step}
-              goToNextHandler={goToNextHandler}
-            />
-          )}
-        </stack.Screen>
-
-        {/* Auth screens */}
-        <stack.Screen name="Login" component={Login} />
-        <stack.Screen name="Signup" component={Signup} />
-        <stack.Screen name="Home" component={HomeScree} />
-      </stack.Navigator>
+      <AuthScreen step={step} goToNextHandler={goToNextHandler} />
     </NavigationContainer>
   );
 }
