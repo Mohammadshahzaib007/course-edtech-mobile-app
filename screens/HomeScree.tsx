@@ -65,6 +65,7 @@ const HomeScreen = () => {
                     courseDuration={item.courseDuration}
                     courseTitle={item.courseTitle}
                     courseDescription={item.courseDescription}
+                    thumbnailUrl={item.thumbnailUrl}
                   />
                 )}
               />

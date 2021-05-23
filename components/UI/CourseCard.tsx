@@ -13,17 +13,21 @@ type PropsType = {
   courseDuration: string;
   courseTitle: string;
   courseDescription: string;
+  thumbnailUrl: string;
 };
 
 const CourseCard = (props: PropsType) => {
-  const { courseDuration, courseTitle, courseDescription } = props;
+  const { courseDuration, courseTitle, courseDescription, thumbnailUrl } =
+    props;
 
   return (
     <View style={{ borderRadius: 8, overflow: "hidden" }}>
       <TouchableNativeFeedback>
         <View style={styles.cardContainer}>
           <ImageBackground
-            source={{ uri: "https://picsum.photos/300/300?grayscale" }}
+            source={{
+              uri: thumbnailUrl,
+            }}
             style={styles.bgImage}
             resizeMode="cover"
           >
@@ -37,7 +41,11 @@ const CourseCard = (props: PropsType) => {
             >
               {courseDuration}
             </Typography>
-            <Typography numberOfLines={1} variant="heading1" style={{ marginBottom: 4 }}>
+            <Typography
+              numberOfLines={1}
+              variant="heading1"
+              style={{ marginBottom: 4 }}
+            >
               {courseTitle}
             </Typography>
             <Typography numberOfLines={2} variant="paragraphMedium">
@@ -60,7 +68,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#BEBAB3",
     overflow: "hidden",
-    marginBottom: 24
+    marginBottom: 24,
   },
 
   bgImage: {
