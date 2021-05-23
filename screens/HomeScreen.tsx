@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -17,6 +17,22 @@ const DEVICE_WIDTH = Dimensions.get("window").width;
 const HomeScreen = () => {
   const navigation = useNavigation();
 
+  const [categiroy, setCategiroy] = useState<string>("");
+
+  const [query, setQuery] = useState("");
+
+  const [course, setCourse] = useState(courses);
+
+  const queryHandler = (text: string) => {
+    setQuery(text);
+    console.log(text);
+  };
+
+  const categiroyHandler = (selectedCategiroy: string) => {
+    setCategiroy(selectedCategiroy);
+    console.log(categiroy);
+  };
+
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.container}>
@@ -25,7 +41,7 @@ const HomeScreen = () => {
           {/* rendering the courses */}
           {
             <FlatList
-              data={courses}
+              data={course}
               renderItem={({ item }) => (
                 <CourseCard
                   onPress={() =>
@@ -40,7 +56,9 @@ const HomeScreen = () => {
                   price={item.price}
                 />
               )}
-              ListHeaderComponent={HomeHeader}
+              ListHeaderComponent={() => (
+                <HomeHeader categiroyHandler={categiroyHandler} />
+              )}
             />
           }
         </View>

@@ -7,10 +7,11 @@ import Typography from "./UI/Typography";
 type PropsType = {
   filterName: string;
   options: string[];
+  categiroyHandler: (selectedCategiroy: string) => void;
 };
 
 const Filter = (props: PropsType) => {
-  const { filterName, options } = props;
+  const { filterName, options, categiroyHandler } = props;
 
   return (
     <View style={styles.filterContainer}>
@@ -23,7 +24,7 @@ const Filter = (props: PropsType) => {
         >
           {options.map((name, i) => (
             <View key={i} style={{ overflow: "hidden", borderRadius: 12 }}>
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={() => categiroyHandler(name)}>
                 <View style={styles.filterItemContainer}>
                   <Typography
                     variant="paragraphSmall"
@@ -58,6 +59,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 16,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
 });

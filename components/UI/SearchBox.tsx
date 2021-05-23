@@ -1,15 +1,23 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TextInputProps, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import CustomTextInput from "./CustomTextInput";
 import IconButton from "./IconButton";
 
-const SearchBox = () => {
+type PropsType = {
+  queryHandler?: (text: string) => void;
+};
+
+const SearchBox = ({ queryHandler }: PropsType) => {
   return (
     <View style={styles.searchContainer}>
-      <CustomTextInput placeholder="Search course" style={{ flex: 1, borderWidth: 0 }} />
+      <CustomTextInput
+        onChangeText={queryHandler}
+        placeholder="Search course"
+        style={{ flex: 1, borderWidth: 0 }}
+      />
       <View style={{ marginRight: 5 }}>
-        <IconButton style={{borderWidth: 0}}>
+        <IconButton style={{ borderWidth: 0 }}>
           <Feather name="search" size={24} color="black" />
         </IconButton>
       </View>

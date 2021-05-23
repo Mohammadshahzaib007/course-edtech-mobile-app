@@ -6,4 +6,5 @@ export interface Course {
   thumbnailUrl: string;
   price: number | string;
   aboutTheCourse: string;
+  categiroy: string[];
 }

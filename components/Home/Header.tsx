@@ -6,7 +6,11 @@ import SearchBox from "../UI/SearchBox";
 import Typography from "../UI/Typography";
 import { Fontisto } from "@expo/vector-icons";
 
-const HomeHeader = () => {
+type PropsType = {
+  categiroyHandler: (selectedCategiroy: string) => void;
+};
+
+const HomeHeader = ({ categiroyHandler }: PropsType) => {
   return (
     <View style={{ marginBottom: 24 }}>
       {/* header/top section */}
@@ -34,7 +38,7 @@ const HomeHeader = () => {
 
       {/* filter */}
       <View style={{ width: "100%" }}>
-        <Filter filterName="Categiroy" options={["CSS", "UX", "Swift", "UI"]} />
+        <Filter categiroyHandler={categiroyHandler} filterName="Categiroy" options={["CSS", "UX", "Swift", "UI"]} />
       </View>
     </View>
   );
