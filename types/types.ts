@@ -4,4 +4,6 @@ export interface Course {
   courseTitle: string;
   courseDescription: string;
   thumbnailUrl: string;
+  price: number | string;
+  aboutTheCourse: string;
 }

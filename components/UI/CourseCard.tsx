@@ -16,6 +16,7 @@ type PropsType = {
   courseDescription: string;
   thumbnailUrl: string;
   onPress: (event: GestureResponderEvent) => void;
+  price: number | string;
 };
 
 const CourseCard = (props: PropsType) => {
@@ -25,6 +26,7 @@ const CourseCard = (props: PropsType) => {
     courseDescription,
     thumbnailUrl,
     onPress,
+    price,
   } = props;
 
   return (
@@ -38,7 +40,7 @@ const CourseCard = (props: PropsType) => {
             style={styles.bgImage}
             resizeMode="cover"
           >
-            <PriceCard price="$ 50" />
+            <PriceCard price={price} />
           </ImageBackground>
           <View style={styles.contentContainer}>
             <Typography

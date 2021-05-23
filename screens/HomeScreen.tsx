@@ -37,6 +37,7 @@ const HomeScreen = () => {
                   courseTitle={item.courseTitle}
                   courseDescription={item.courseDescription}
                   thumbnailUrl={item.thumbnailUrl}
+                  price={item.price}
                 />
               )}
               ListHeaderComponent={HomeHeader}

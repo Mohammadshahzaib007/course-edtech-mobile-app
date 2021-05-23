@@ -7,13 +7,15 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
-import { RouteProp, useRoute } from "@react-navigation/core";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import IconButton from "../components/UI/IconButton";
 import { Ionicons } from "@expo/vector-icons";
 import Typography from "../components/UI/Typography";
 import PriceCard from "../components/UI/PriceCard";
 import CustomButton from "../components/UI/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
+import { courses } from "../data/data";
+import { Course } from "../types/types";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -25,8 +27,12 @@ type ParamsType = {
 
 const CourseDetailsScreen = () => {
   const { params } = useRoute<RouteProp<ParamsType, "CourseDetailsScreen">>();
+  const navigation = useNavigation();
 
+  //Id of the course that has to be shown
   const { courseId } = params;
+
+  const course = courses.find((item) => item.id === courseId) as Course;
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -34,15 +40,19 @@ const CourseDetailsScreen = () => {
         <ScrollView>
           {/* HEADER */}
           <View style={styles.header}>
-            <IconButton style={{ height: 40, width: 40 }}>
+            <IconButton
+              style={{ height: 40, width: 40 }}
+              onPress={() => navigation.navigate("Home")}
+            >
               <Ionicons name="chevron-back" size={13} color="black" />
             </IconButton>
 
             <Typography
               variant="heading1"
               style={{ flex: 1, textAlign: "center" }}
+              numberOfLines={1}
             >
-              HTML
+              {course?.courseTitle}
             </Typography>
           </View>
 
@@ -52,7 +62,7 @@ const CourseDetailsScreen = () => {
               style={styles.image}
               resizeMode="cover"
               source={{
-                uri: "https://img-b.udemycdn.com/course/240x135/2337794_eff5_3.jpg?secure=1rhbAsfy8oCdK5FLNUWygg%3D%3D%2C1621754512",
+                uri: course?.thumbnailUrl,
               }}
             ></ImageBackground>
           </View>
@@ -65,7 +75,7 @@ const CourseDetailsScreen = () => {
               alignItems: "flex-end",
             }}
           >
-            <PriceCard style={{ margin: 0 }} price="$ 50" />
+            <PriceCard style={{ margin: 0 }} price={course?.price} />
           </View>
 
           {/* TEXT CONTAINER */}
@@ -76,16 +86,15 @@ const CourseDetailsScreen = () => {
               variant="paragraphMedium"
               style={{ marginTop: 4, marginBottom: 16 }}
             >
-              You can launch a new career in web develop- ment today by learning
-              HTML &amp; CSS. You don't need a computer science degree or
-              expensive software. All you need is a computer, a bit of time, a
-              lot of determination, and a teacher you trust.
+              {course?.aboutTheCourse}
             </Typography>
 
             <Typography variant="heading1" style={{ marginBottom: 4 }}>
               Duration
             </Typography>
-            <Typography variant="paragraphMedium">1 h 30 min</Typography>
+            <Typography variant="paragraphMedium">
+              {course?.courseDuration}
+            </Typography>
           </View>
         </ScrollView>
 
