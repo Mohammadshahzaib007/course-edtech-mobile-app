@@ -6,6 +6,7 @@ import {
   ScrollView,
   View,
   Dimensions,
+  FlatList,
 } from "react-native";
 import IconButton from "../components/UI/IconButton";
 import Typography from "../components/UI/Typography";
@@ -13,6 +14,7 @@ import { Fontisto } from "@expo/vector-icons";
 import Filter from "../components/Filter";
 import CourseCard from "../components/UI/CourseCard";
 import SearchBox from "../components/UI/SearchBox";
+import { courses } from "../data/data";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -54,36 +56,19 @@ const HomeScreen = () => {
 
           {/* content container */}
           <View style={{ width: "100%", marginTop: 24 }}>
-            <CourseCard
-              courseDuration="3 h 30 min"
-              courseTitle="UI Advanced"
-              courseDescription="Advanced mobile interface design"
-            />
-            <CourseCard
-              courseDuration="3 h 30 min"
-              courseTitle="UI Advanced"
-              courseDescription="Advanced mobile interface design"
-            />
-            <CourseCard
-              courseDuration="3 h 30 min"
-              courseTitle="UI Advanced"
-              courseDescription="Advanced mobile interface design"
-            />
-            <CourseCard
-              courseDuration="3 h 30 min"
-              courseTitle="UI Advanced"
-              courseDescription="Advanced mobile interface design"
-            />
-            <CourseCard
-              courseDuration="3 h 30 min"
-              courseTitle="UI Advanced"
-              courseDescription="Advanced mobile interface design"
-            />
-            <CourseCard
-              courseDuration="3 h 30 min"
-              courseTitle="UI Advanced"
-              courseDescription="Advanced mobile interface design"
-            />
+            {/* rendering the courses */}
+            {
+              <FlatList
+                data={courses}
+                renderItem={({ item }) => (
+                  <CourseCard
+                    courseDuration={item.courseDuration}
+                    courseTitle={item.courseTitle}
+                    courseDescription={item.courseDescription}
+                  />
+                )}
+              />
+            }
           </View>
         </View>
       </SafeAreaView>
