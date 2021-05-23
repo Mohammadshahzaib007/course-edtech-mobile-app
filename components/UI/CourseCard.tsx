@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  GestureResponderEvent,
   ImageBackground,
   StyleSheet,
   Text,
@@ -14,15 +15,21 @@ type PropsType = {
   courseTitle: string;
   courseDescription: string;
   thumbnailUrl: string;
+  onPress: (event: GestureResponderEvent) => void;
 };
 
 const CourseCard = (props: PropsType) => {
-  const { courseDuration, courseTitle, courseDescription, thumbnailUrl } =
-    props;
+  const {
+    courseDuration,
+    courseTitle,
+    courseDescription,
+    thumbnailUrl,
+    onPress,
+  } = props;
 
   return (
     <View style={{ borderRadius: 8, overflow: "hidden" }}>
-      <TouchableNativeFeedback>
+      <TouchableNativeFeedback onPress={onPress}>
         <View style={styles.cardContainer}>
           <ImageBackground
             source={{

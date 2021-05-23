@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScree";
+import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import YourCoursesScreen from "../screens/YourCoursesScreen";
 import SettingScreen from "../screens/SettingScreen";
@@ -10,6 +10,7 @@ import colors from "../constants/colors";
 import { Foundation } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import CourseDetailsScreen from "../screens/CourseDetailsScreen";
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -87,6 +88,7 @@ const HomeStacks = () => {
   return (
     <HomeStack.Navigator headerMode="none">
       <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="CourseDetails" component={CourseDetailsScreen} />
     </HomeStack.Navigator>
   );
 };
