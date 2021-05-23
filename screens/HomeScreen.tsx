@@ -42,6 +42,7 @@ const HomeScreen = () => {
           {
             <FlatList
               data={course}
+              showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <CourseCard
                   onPress={() =>

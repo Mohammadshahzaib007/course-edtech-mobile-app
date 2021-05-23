@@ -37,7 +37,7 @@ const CourseDetailsScreen = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {/* HEADER */}
           <View style={styles.header}>
             <IconButton
