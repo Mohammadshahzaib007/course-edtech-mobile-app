@@ -1,15 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 import colors from "../../constants/colors";
 import Typography from "./Typography";
 
 type PropsType = {
   price: string | number;
+  style?: StyleProp<ViewStyle>;
 };
 
-const PriceCard = ({ price }: PropsType) => {
+const PriceCard = ({ price, style }: PropsType) => {
   return (
-    <View style={styles.priceCardContainer}>
+    <View style={[styles.priceCardContainer, style]}>
       <Typography variant="buttonSmallText" style={{ color: "#fff" }}>
         {price}
       </Typography>
@@ -28,6 +29,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: "center",
     justifyContent: "center",
-    margin: 8
+    margin: 8,
   },
 });
