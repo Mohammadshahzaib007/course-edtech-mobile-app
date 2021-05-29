@@ -11,6 +11,7 @@ import { courses } from "../data/data";
 import { useNavigation } from "@react-navigation/core";
 
 import HomeHeader from "../components/Home/Header";
+import Container from "../components/UI/Container";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -35,7 +36,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <View style={styles.container}>
+      <Container>
         {/* content container */}
         <View style={{ width: "100%" }}>
           {/* rendering the courses */}
@@ -43,6 +44,8 @@ const HomeScreen = () => {
             <FlatList
               data={course}
               showsVerticalScrollIndicator={false}
+              keyExtractor={item => item.id.toString()}
+
               renderItem={({ item }) => (
                 <CourseCard
                   onPress={() =>
@@ -63,7 +66,7 @@ const HomeScreen = () => {
             />
           }
         </View>
-      </View>
+      </Container>
     </SafeAreaView>
   );
 };

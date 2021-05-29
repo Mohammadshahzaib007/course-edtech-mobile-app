@@ -17,6 +17,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { courses } from "../data/data";
 import { Course } from "../types/types";
 import CommonHeader from "../components/UI/CommonHeader";
+import Container from "../components/UI/Container";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -37,7 +38,7 @@ const CourseDetailsScreen = () => {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <View style={styles.container}>
+      <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* HEADER */}
           <CommonHeader
@@ -98,7 +99,7 @@ const CourseDetailsScreen = () => {
             Add to cart
           </CustomButton>
         </View>
-      </View>
+      </Container>
     </SafeAreaView>
   );
 };
@@ -108,12 +109,7 @@ export default CourseDetailsScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignItems: "center",
     paddingVertical: 25,
-  },
-  container: {
-    width: DEVICE_WIDTH * 0.91466,
-    flex: 1,
   },
 
   header: {
