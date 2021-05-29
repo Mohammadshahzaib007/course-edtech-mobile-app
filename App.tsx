@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -9,6 +9,7 @@ import AuthScreen from "./navigation/Auth";
 import Home from "./navigation/Home";
 import HomeStacks from "./navigation/Home";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const fetchFonts = async () => {
   return Font.loadAsync({
@@ -31,6 +32,25 @@ export default function App() {
   const goToNextHandler = () => {
     setStep((prevState) => prevState + 1);
   };
+
+  // if user opens the App first time it will store
+  // the value in the local storage.
+  // if value is presents; Onboarding screen will not be shown
+  const storeOnboardingScreenStatus = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@shouldShowOnboardingScreen");
+
+      if (value === null) {
+        await AsyncStorage.setItem("@shouldShowOnboardingScreen", "true");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    storeOnboardingScreenStatus();
+  }, []);
 
   if (!fontLoaded) {
     return (
