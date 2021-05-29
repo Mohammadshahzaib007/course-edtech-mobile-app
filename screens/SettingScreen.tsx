@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import SettingOption from "../components/SettingOption";
 import CommonHeader from "../components/UI/CommonHeader";
@@ -10,6 +10,11 @@ import Typography from "../components/UI/Typography";
 import { ScrollView } from "react-native-gesture-handler";
 
 const SettingScreen = () => {
+  // this is for notification switch
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  // this is for renderning data
   const settingOptions = [
     {
       title: "Name",
@@ -54,6 +59,8 @@ const SettingScreen = () => {
                 }
                 optionTitle="Notifications"
                 toggleOption={true}
+                toggleSwitch={toggleSwitch}
+                isEnabled={isEnabled}
               />
 
               <Typography variant="heading2" style={{ marginVertical: 16 }}>

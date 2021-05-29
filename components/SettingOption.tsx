@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Switch } from "react-native";
 import colors from "../constants/colors";
 import IconButton from "./UI/IconButton";
 import Typography from "./UI/Typography";
@@ -10,10 +10,19 @@ type PropsType = {
   toggleOption?: boolean;
   optionTitle: string;
   optionSubTitle?: string;
+  isEnabled?: boolean;
+  toggleSwitch?: (value: boolean) => void;
 };
 
 const SettingOption = (props: PropsType) => {
-  const { icon, toggleOption, optionTitle, optionSubTitle } = props;
+  const {
+    icon,
+    toggleOption,
+    optionTitle,
+    optionSubTitle,
+    toggleSwitch,
+    isEnabled,
+  } = props;
 
   return (
     <View style={styles.optionContainer}>
@@ -33,9 +42,14 @@ const SettingOption = (props: PropsType) => {
       {/* right part */}
       <View style={styles.rightContainer}>
         {toggleOption ? (
-          <Text>Toogle</Text>
+          <Switch
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+            trackColor={{ true: "#5BA092", false: "#BEBAB3" }}
+            thumbColor={isEnabled ? "#5BA092" : "#BEBAB3"}
+          />
         ) : (
-          <IconButton style={{ borderWidth: 0 }}>
+          <IconButton style={{ borderWidth: 0, height: 24, width: 24 }}>
             <Ionicons name="chevron-forward" size={24} color="#BEBAB3" />
           </IconButton>
         )}
