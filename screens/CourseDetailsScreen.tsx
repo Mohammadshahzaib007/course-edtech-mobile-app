@@ -16,6 +16,7 @@ import CustomButton from "../components/UI/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
 import { courses } from "../data/data";
 import { Course } from "../types/types";
+import CommonHeader from "../components/UI/CommonHeader";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -39,22 +40,10 @@ const CourseDetailsScreen = () => {
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* HEADER */}
-          <View style={styles.header}>
-            <IconButton
-              style={{ height: 40, width: 40 }}
-              onPress={() => navigation.navigate("Home")}
-            >
-              <Ionicons name="chevron-back" size={13} color="black" />
-            </IconButton>
-
-            <Typography
-              variant="heading1"
-              style={{ flex: 1, textAlign: "center" }}
-              numberOfLines={1}
-            >
-              {course?.courseTitle}
-            </Typography>
-          </View>
+          <CommonHeader
+            title={course.courseTitle}
+            onPress={() => navigation.navigate("Home")}
+          />
 
           {/* BACKGROUND IMAGE CONTAINER */}
           <View style={{ width: "100%" }}>
