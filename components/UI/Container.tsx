@@ -1,16 +1,23 @@
 import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from "react-native";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
 type PropsType = {
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Container = (props: PropsType) => {
-  const { children } = props;
+  const { children, style } = props;
 
-  return <View style={styles.container}>{children}</View>;
+  return <View style={[styles.container, style]}>{children}</View>;
 };
 
 export default Container;

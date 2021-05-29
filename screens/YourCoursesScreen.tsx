@@ -9,7 +9,7 @@ import { courses } from "../data/data";
 const YourCoursesScreen = () => {
   // const navigation = useNavigation();
 
-  const yourCourses = courses.slice(0, 2);
+  const yourCourses = courses.slice(2, 4);
 
   return (
     <View style={styles.screen}>

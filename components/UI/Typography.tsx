@@ -1,24 +1,18 @@
 import React from "react";
-import { StyleProp, StyleSheet, Text, TextProps, TextStyle, View } from "react-native";
-
-type VariantTypes =
-  | "display1"
-  | "display2"
-  | "display3"
-  | "heading1"
-  | "heading2"
-  | "paragraphLarge"
-  | "paragraphMedium"
-  | "paragraphSmall"
-  | "buttonLargeText"
-  | "buttonMediumText"
-  | "buttonSmallText";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextProps,
+  TextStyle,
+} from "react-native";
+import { VariantTypes } from "../../types/types";
 
 interface propsType extends TextProps {
   children: React.ReactNode;
   style?: StyleProp<TextStyle>;
   variant?: VariantTypes;
-};
+}
 
 const Typography = (props: propsType) => {
   const { children, style, variant } = props;
@@ -69,7 +63,10 @@ const Typography = (props: propsType) => {
   }
 
   return (
-    <Text {...props} style={{ ...styles.common, ...variantStyle, ...(style as Object) }}>
+    <Text
+      {...props}
+      style={{ ...styles.common, ...variantStyle, ...(style as Object) }}
+    >
       {children}
     </Text>
   );
