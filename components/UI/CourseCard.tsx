@@ -11,12 +11,13 @@ import PriceCard from "./PriceCard";
 import Typography from "./Typography";
 
 type PropsType = {
-  courseDuration: string;
+  courseDuration?: string;
+  leftCourseDuration?: string;
   courseTitle: string;
   courseDescription: string;
   thumbnailUrl: string;
-  onPress: (event: GestureResponderEvent) => void;
-  price: number | string;
+  onPress?: (event: GestureResponderEvent) => void;
+  price?: number | string;
 };
 
 const CourseCard = (props: PropsType) => {
@@ -27,6 +28,7 @@ const CourseCard = (props: PropsType) => {
     thumbnailUrl,
     onPress,
     price,
+    leftCourseDuration,
   } = props;
 
   return (
@@ -40,7 +42,7 @@ const CourseCard = (props: PropsType) => {
             style={styles.bgImage}
             resizeMode="cover"
           >
-            <PriceCard price={price} />
+            {price && <PriceCard price={price!} />}
           </ImageBackground>
           <View style={styles.contentContainer}>
             <Typography
@@ -48,7 +50,7 @@ const CourseCard = (props: PropsType) => {
               variant="paragraphSmall"
               style={{ color: "#5BA092", marginBottom: 4 }}
             >
-              {courseDuration}
+              {courseDuration ? courseDuration : leftCourseDuration}
             </Typography>
             <Typography
               numberOfLines={1}

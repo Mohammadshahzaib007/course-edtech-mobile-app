@@ -14,9 +14,11 @@ const CommonHeader = (props: PropsType) => {
 
   return (
     <View style={styles.header}>
-      <IconButton style={{ height: 40, width: 40 }} onPress={onPress}>
-        <Ionicons name="chevron-back" size={13} color="black" />
-      </IconButton>
+      {onPress && (
+        <IconButton style={{ height: 40, width: 40 }} onPress={onPress}>
+          <Ionicons name="chevron-back" size={13} color="black" />
+        </IconButton>
+      )}
 
       <Typography
         variant="heading1"
