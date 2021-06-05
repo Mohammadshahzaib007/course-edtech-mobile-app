@@ -22,7 +22,7 @@ export default PriceCard;
 
 const styles = StyleSheet.create({
   priceCardContainer: {
-    width: 63,
+    minWidth: 63,
     height: 24,
     backgroundColor: colors.secondary,
     borderRadius: 12,

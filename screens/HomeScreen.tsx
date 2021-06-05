@@ -5,15 +5,19 @@ import {
   View,
   Dimensions,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import CourseCard from "../components/UI/CourseCard";
-import { courses } from "../data/data";
 import { useNavigation } from "@react-navigation/core";
 
 import HomeHeader from "../components/Home/Header";
 import Container from "../components/UI/Container";
+import { axios } from "../http/http";
+import { Course, FetchedCoursesType } from "../types/types";
+import colors from "../constants/colors";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
+const DEVICE_HEIGHT= Dimensions.get("window").height;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -22,7 +26,9 @@ const HomeScreen = () => {
 
   const [query, setQuery] = useState("");
 
-  const [course, setCourse] = useState(courses);
+  const [course, setCourse] = useState<Course[]>([]);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const queryHandler = (text: string) => {
     setQuery(text);
@@ -34,6 +40,42 @@ const HomeScreen = () => {
     console.log(categiroy);
   };
 
+  useEffect(() => {
+    // setIsLoading(true);
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get<FetchedCoursesType>(
+          "/courses/?page=2&page_size=10"
+        );
+        console.log(response);
+
+        const fetchedCourses = response.data.results;
+
+        //updating state with the fetched courses
+        const courses: Course[] = [];
+
+        fetchedCourses?.forEach((course) => {
+          courses?.push({
+            id: course.id,
+            courseTitle: course.title,
+            courseDuration: "1h",
+            courseDescription: course.headline,
+            aboutTheCourse: "",
+            thumbnailUrl: course.image_240x135,
+            price: course.price,
+          });
+
+          setCourse(courses);
+        });
+      } catch (error) {
+      } finally {
+        // setIsLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
   return (
     <SafeAreaView style={styles.screen}>
       <Container>
@@ -42,17 +84,16 @@ const HomeScreen = () => {
           {/* rendering the courses */}
           {
             <FlatList
-              data={course}
+              data={isLoading ? [] : course}
               showsVerticalScrollIndicator={false}
-              keyExtractor={item => item.id.toString()}
-
+              keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <CourseCard
-                  onPress={() =>
-                    navigation.navigate("CourseDetails", {
-                      courseId: item.id,
-                    })
-                  }
+                  // onPress={() =>
+                  //   navigation.navigate("CourseDetails", {
+                  //     courseId: item.id,
+                  //   })
+                  // }
                   courseDuration={item.courseDuration}
                   courseTitle={item.courseTitle}
                   courseDescription={item.courseDescription}
@@ -61,7 +102,21 @@ const HomeScreen = () => {
                 />
               )}
               ListHeaderComponent={() => (
-                <HomeHeader categiroyHandler={categiroyHandler} />
+                <>
+                  <HomeHeader categiroyHandler={categiroyHandler} />
+                  {isLoading && (
+                    <View
+                      style={{
+                        flex: 1,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginTop: DEVICE_HEIGHT * 0.5
+                      }}
+                    >
+                      <ActivityIndicator size="large" color={colors.primary} />
+                    </View>
+                  )}
+                </>
               )}
             />
           }
