@@ -49,7 +49,7 @@ const HomeScreen = () => {
         const response = await axios.get<FetchedCoursesType>(
           `/courses/?page=1&page_size=10&category=${categiroy}&has_coding_exercises=True&ordering=highest-rated`
         );
-        console.log(response);
+        console.log(response.data.results?.length);
 
         const fetchedCourses = response.data.results;
 
@@ -118,7 +118,9 @@ const HomeScreen = () => {
                   )}
                 </>
               )}
-              ListFooterComponent={() => <Footer />}
+              ListFooterComponent={() =>
+                isLoading ? <View></View> : <Footer />
+              }
             />
           }
         </View>
