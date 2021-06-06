@@ -9,10 +9,10 @@ import { Fontisto } from "@expo/vector-icons";
 type PropsType = {
   categiroyHandler: (selectedCategiroy: string) => void;
   selectedFilter: string;
-
+  queryHandler:(query:string) => void
 };
 
-const HomeHeader = ({ categiroyHandler, selectedFilter }: PropsType) => {
+const HomeHeader = ({ categiroyHandler, selectedFilter,queryHandler }: PropsType) => {
   return (
     <View style={{ marginBottom: 28 }}>
       {/* header/top section */}
@@ -35,7 +35,7 @@ const HomeHeader = ({ categiroyHandler, selectedFilter }: PropsType) => {
 
       {/* search box container */}
       <View style={{ width: "100%", paddingVertical: 16 }}>
-        <SearchBox />
+        <SearchBox queryHandler={queryHandler} />
       </View>
 
       {/* filter */}

@@ -70,7 +70,6 @@ const HomeScreen = () => {
 
   const queryHandler = (text: string) => {
     setQuery(text);
-    console.log(text);
   };
 
   const categiroyHandler = (selectedCategiroy: string) => {
@@ -86,7 +85,6 @@ const HomeScreen = () => {
         const response = await axios.get<FetchedCoursesType>(
           `/courses/?page=1&page_size=1000&category=${categiroy}&has_coding_exercises=True&ordering=highest-rated`
         );
-        console.log(response.data.results?.length);
 
         const fetchedCourses = response.data.results;
 
@@ -115,63 +113,76 @@ const HomeScreen = () => {
     fetchCourses();
   }, [categiroy]);
 
+  
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.log(`now the query can be used ${query}`);
+    }, 600);
+
+    // clean up function
+    return () => clearTimeout(timeoutId);
+  }, [query]);
+
   return (
     <SafeAreaView style={styles.screen}>
       <Container>
         {/* content container */}
         <View style={{ width: "100%" }}>
           {/* rendering the courses */}
-          {
-            <FlatList
-              ref={flatListRef}
-              data={isLoading ? [] : currentItems}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <CourseCard
-                  // onPress={() =>
-                  //   navigation.navigate("CourseDetails", {
-                  //     courseId: item.id,
-                  //   })
-                  // }
-                  courseDuration={item.courseDuration}
-                  courseTitle={item.courseTitle}
-                  courseDescription={item.courseDescription}
-                  thumbnailUrl={item.thumbnailUrl}
-                  price={item.price}
-                />
-              )}
-              ListHeaderComponent={() => (
-                <>
-                  <HomeHeader
-                    selectedFilter={categiroy}
-                    categiroyHandler={categiroyHandler}
-                  />
-                  {isLoading && (
-                    <ActivityIndicator
-                      style={{ marginTop: DEVICE_HEIGHT * 0.25 }}
-                      size="large"
-                      color={colors.primary}
-                    />
-                  )}
-                </>
-              )}
-              ListFooterComponent={() =>
-                isLoading ? (
-                  <View></View>
-                ) : (
-                  <Footer
-                    totalItems={course.length}
-                    itemsPerPage={10}
-                    goToPrevious={goToPrevious}
-                    goToNext={goToNext}
-                    currentPageNumber={currentPage}
-                    goToClickedPageNumber={paginate}
-                  />
-                )
-              }
+          <>
+            <HomeHeader
+              queryHandler={queryHandler}
+              selectedFilter={categiroy}
+              categiroyHandler={categiroyHandler}
             />
-          }
+            {
+              <FlatList
+                ref={flatListRef}
+                data={isLoading ? [] : currentItems}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <CourseCard
+                    // onPress={() =>
+                    //   navigation.navigate("CourseDetails", {
+                    //     courseId: item.id,
+                    //   })
+                    // }
+                    courseDuration={item.courseDuration}
+                    courseTitle={item.courseTitle}
+                    courseDescription={item.courseDescription}
+                    thumbnailUrl={item.thumbnailUrl}
+                    price={item.price}
+                  />
+                )}
+                ListHeaderComponent={() => (
+                  <>
+                    {isLoading && (
+                      <ActivityIndicator
+                        style={{ marginTop: DEVICE_HEIGHT * 0.25 }}
+                        size="large"
+                        color={colors.primary}
+                      />
+                    )}
+                  </>
+                )}
+                ListFooterComponent={() =>
+                  isLoading ? (
+                    <View></View>
+                  ) : (
+                    <Footer
+                      totalItems={course.length}
+                      itemsPerPage={10}
+                      goToPrevious={goToPrevious}
+                      goToNext={goToNext}
+                      currentPageNumber={currentPage}
+                      goToClickedPageNumber={paginate}
+                    />
+                  )
+                }
+              />
+            }
+          </>
         </View>
       </Container>
     </SafeAreaView>

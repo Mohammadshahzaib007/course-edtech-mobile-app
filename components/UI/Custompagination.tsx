@@ -26,7 +26,14 @@ const Custompagination = (props: CustomPropsType) => {
   console.log("length", pageNumbers.length);
 
   return (
-    <View style={{ width: "100%", overflow: "hidden", borderRadius: 50 }}>
+    <View
+      style={{
+        width: "100%",
+        overflow: "hidden",
+        display: totalItems > itemsPerPage ? "flex" : "none",
+        borderRadius: 50,
+      }}
+    >
       <View style={styles.paginationContainer}>
         {currentPageNumber !== 1 && (
           <IconButton
