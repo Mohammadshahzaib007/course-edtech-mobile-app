@@ -1,16 +1,29 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { CustomPropsType } from "../../types/types";
 import Custompagination from "../UI/Custompagination";
 
-const Footer = () => {
+interface PropsType extends CustomPropsType {}
+
+const Footer = (props: PropsType) => {
+  const {
+    goToNext,
+    goToPrevious,
+    totalItems,
+    itemsPerPage,
+    currentPageNumber,
+    goToClickedPageNumber
+  } = props;
+
   return (
     <View style={{ width: "100%" }}>
       <Custompagination
-        totalItems={100}
-        itemsPerPage={10}
-        goToNext={() => {}}
-        goToPrevious={() => {}}
-        currentPageNumber={1}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        goToNext={goToNext}
+        goToPrevious={goToPrevious}
+        currentPageNumber={currentPageNumber}
+        goToClickedPageNumber={goToClickedPageNumber}
       />
     </View>
   );

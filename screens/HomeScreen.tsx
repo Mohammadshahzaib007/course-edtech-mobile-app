@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -31,6 +31,43 @@ const HomeScreen = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const flatListRef = useRef<FlatList<Course> | null>(null);
+
+  const scrollToTop = () => {
+    flatListRef?.current?.scrollToOffset({ animated: true, offset: 0 });
+  };
+
+  //-------------------------------------------------------------------------------------------------------
+  //for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+
+  // get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // getting current items to show on the page
+  const currentItems = course.slice(indexOfFirstItem, indexOfLastItem);
+
+  // for paginating to the next page
+  // getting pageNumber from the Pagination Component
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    scrollToTop();
+  };
+
+  // by clicking on the backward button
+  const goToPrevious = () => {
+    setCurrentPage((prevState) => prevState - 1);
+    scrollToTop();
+  };
+
+  // by clicking on the forward button
+  const goToNext = () => {
+    setCurrentPage((prevState) => prevState + 1);
+    scrollToTop();
+  };
+
   const queryHandler = (text: string) => {
     setQuery(text);
     console.log(text);
@@ -47,7 +84,7 @@ const HomeScreen = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get<FetchedCoursesType>(
-          `/courses/?page=1&page_size=10&category=${categiroy}&has_coding_exercises=True&ordering=highest-rated`
+          `/courses/?page=1&page_size=1000&category=${categiroy}&has_coding_exercises=True&ordering=highest-rated`
         );
         console.log(response.data.results?.length);
 
@@ -86,7 +123,8 @@ const HomeScreen = () => {
           {/* rendering the courses */}
           {
             <FlatList
-              data={isLoading ? [] : course}
+              ref={flatListRef}
+              data={isLoading ? [] : currentItems}
               showsVerticalScrollIndicator={false}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
@@ -119,7 +157,18 @@ const HomeScreen = () => {
                 </>
               )}
               ListFooterComponent={() =>
-                isLoading ? <View></View> : <Footer />
+                isLoading ? (
+                  <View></View>
+                ) : (
+                  <Footer
+                    totalItems={course.length}
+                    itemsPerPage={10}
+                    goToPrevious={goToPrevious}
+                    goToNext={goToNext}
+                    currentPageNumber={currentPage}
+                    goToClickedPageNumber={paginate}
+                  />
+                )
               }
             />
           }

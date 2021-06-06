@@ -9,6 +9,16 @@ export interface Course {
   categiroy?: string[];
 }
 
+// custom pagination types
+export type CustomPropsType = {
+  itemsPerPage: number;
+  totalItems: number;
+  goToNext: () => void;
+  goToPrevious: () => void;
+  currentPageNumber: number;
+  goToClickedPageNumber: (pageNum:number) => void
+};
+
 // Typography variants types
 export type VariantTypes =
   | "display1"
