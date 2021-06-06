@@ -15,9 +15,10 @@ import Container from "../components/UI/Container";
 import { axios } from "../http/http";
 import { Course, FetchedCoursesType } from "../types/types";
 import colors from "../constants/colors";
+import Footer from "../components/Home/Footer";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
-const DEVICE_HEIGHT= Dimensions.get("window").height;
+const DEVICE_HEIGHT = Dimensions.get("window").height;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -28,7 +29,7 @@ const HomeScreen = () => {
 
   const [course, setCourse] = useState<Course[]>([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const queryHandler = (text: string) => {
     setQuery(text);
@@ -36,16 +37,17 @@ const HomeScreen = () => {
   };
 
   const categiroyHandler = (selectedCategiroy: string) => {
-    setCategiroy(selectedCategiroy);
-    console.log(categiroy);
+    setCategiroy((prevState) =>
+      prevState === selectedCategiroy ? "" : selectedCategiroy
+    );
   };
 
   useEffect(() => {
-    // setIsLoading(true);
+    setIsLoading(true);
     const fetchCourses = async () => {
       try {
         const response = await axios.get<FetchedCoursesType>(
-          "/courses/?page=2&page_size=10"
+          `/courses/?page=1&page_size=10&category=${categiroy}&has_coding_exercises=True&ordering=highest-rated`
         );
         console.log(response);
 
@@ -69,12 +71,12 @@ const HomeScreen = () => {
         });
       } catch (error) {
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchCourses();
-  }, []);
+  }, [categiroy]);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -103,21 +105,20 @@ const HomeScreen = () => {
               )}
               ListHeaderComponent={() => (
                 <>
-                  <HomeHeader categiroyHandler={categiroyHandler} />
+                  <HomeHeader
+                    selectedFilter={categiroy}
+                    categiroyHandler={categiroyHandler}
+                  />
                   {isLoading && (
-                    <View
-                      style={{
-                        flex: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginTop: DEVICE_HEIGHT * 0.5
-                      }}
-                    >
-                      <ActivityIndicator size="large" color={colors.primary} />
-                    </View>
+                    <ActivityIndicator
+                      style={{ marginTop: DEVICE_HEIGHT * 0.25 }}
+                      size="large"
+                      color={colors.primary}
+                    />
                   )}
                 </>
               )}
+              ListFooterComponent={() => <Footer />}
             />
           }
         </View>

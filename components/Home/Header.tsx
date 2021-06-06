@@ -8,11 +8,13 @@ import { Fontisto } from "@expo/vector-icons";
 
 type PropsType = {
   categiroyHandler: (selectedCategiroy: string) => void;
+  selectedFilter: string;
+
 };
 
-const HomeHeader = ({ categiroyHandler }: PropsType) => {
+const HomeHeader = ({ categiroyHandler, selectedFilter }: PropsType) => {
   return (
-    <View style={{ marginBottom: 24 }}>
+    <View style={{ marginBottom: 28 }}>
       {/* header/top section */}
       <View style={styles.header}>
         {/* text container */}
@@ -38,7 +40,27 @@ const HomeHeader = ({ categiroyHandler }: PropsType) => {
 
       {/* filter */}
       <View style={{ width: "100%" }}>
-        <Filter categiroyHandler={categiroyHandler} filterName="Categiroy" options={["CSS", "UX", "Swift", "UI"]} />
+        <Filter
+        selectedFilter={selectedFilter}
+          categiroyHandler={categiroyHandler}
+          filterName="Categiroy"
+          options={[
+            "Business",
+            "Design",
+            "Finance & Accounting",
+            "Health & Fitness",
+            "IT & Software",
+            "Lifestyle",
+            "Marketing",
+            "Music",
+            "Office Productivity",
+            "Personal Development",
+            "Photography & Video",
+            "Teaching & Academics",
+            "Udemy Free Resource Center",
+            "Vodafone",
+          ]}
+        />
       </View>
     </View>
   );

@@ -8,10 +8,11 @@ type PropsType = {
   filterName: string;
   options: string[];
   categiroyHandler: (selectedCategiroy: string) => void;
+  selectedFilter: string;
 };
 
 const Filter = (props: PropsType) => {
-  const { filterName, options, categiroyHandler } = props;
+  const { filterName, options, categiroyHandler, selectedFilter } = props;
 
   return (
     <View style={styles.filterContainer}>
@@ -25,12 +26,24 @@ const Filter = (props: PropsType) => {
           {options.map((name, i) => (
             <View key={i} style={{ overflow: "hidden", borderRadius: 12 }}>
               <TouchableNativeFeedback onPress={() => categiroyHandler(name)}>
-                <View style={styles.filterItemContainer}>
+                <View
+                  style={[
+                    styles.filterItemContainer,
+                    {
+                      backgroundColor:
+                        selectedFilter === name
+                          ? colors.primary
+                          : colors.secondary,
+                    },
+                  ]}
+                >
                   <Typography
                     variant="paragraphSmall"
-                    style={{ color: "#fff" }}
+                    style={{
+                      color: "#fff",
+                    }}
                   >
-                    #{name}
+                    {name}
                   </Typography>
                 </View>
               </TouchableNativeFeedback>
