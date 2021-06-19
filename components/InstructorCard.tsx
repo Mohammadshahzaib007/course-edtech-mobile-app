@@ -26,7 +26,7 @@ const InstructorCard = (props: PropTypes) => {
           {instructorName}
         </Typography>
         <Typography
-          style={{ maxWidth: "80%", marginTop: 5 }}
+          style={{ maxWidth: "85%", marginTop: 5 }}
           numberOfLines={2}
           variant="buttonSmallText"
         >
