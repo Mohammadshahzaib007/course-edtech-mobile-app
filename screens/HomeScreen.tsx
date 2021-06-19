@@ -113,7 +113,6 @@ const HomeScreen = () => {
     fetchCourses();
   }, [categiroy]);
 
-  
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       console.log(`now the query can be used ${query}`);
@@ -129,60 +128,60 @@ const HomeScreen = () => {
         {/* content container */}
         <View style={{ width: "100%" }}>
           {/* rendering the courses */}
-          <>
-            <HomeHeader
-              queryHandler={queryHandler}
-              selectedFilter={categiroy}
-              categiroyHandler={categiroyHandler}
-            />
-            {
-              <FlatList
-                ref={flatListRef}
-                data={isLoading ? [] : currentItems}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                  <CourseCard
-                    // onPress={() =>
-                    //   navigation.navigate("CourseDetails", {
-                    //     courseId: item.id,
-                    //   })
-                    // }
-                    courseDuration={item.courseDuration}
-                    courseTitle={item.courseTitle}
-                    courseDescription={item.courseDescription}
-                    thumbnailUrl={item.thumbnailUrl}
-                    price={item.price}
-                  />
-                )}
-                ListHeaderComponent={() => (
-                  <>
-                    {isLoading && (
-                      <ActivityIndicator
-                        style={{ marginTop: DEVICE_HEIGHT * 0.25 }}
-                        size="large"
-                        color={colors.primary}
-                      />
-                    )}
-                  </>
-                )}
-                ListFooterComponent={() =>
-                  isLoading ? (
-                    <View></View>
-                  ) : (
-                    <Footer
-                      totalItems={course.length}
-                      itemsPerPage={10}
-                      goToPrevious={goToPrevious}
-                      goToNext={goToNext}
-                      currentPageNumber={currentPage}
-                      goToClickedPageNumber={paginate}
+
+          {
+            <FlatList
+              ref={flatListRef}
+              data={isLoading ? [] : currentItems}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <CourseCard
+                  onPress={() =>
+                    navigation.navigate("CourseDetails", {
+                      courseId: item.id,
+                    })
+                  }
+                  courseDuration={item.courseDuration}
+                  courseTitle={item.courseTitle}
+                  courseDescription={item.courseDescription}
+                  thumbnailUrl={item.thumbnailUrl}
+                  price={item.price}
+                />
+              )}
+              ListHeaderComponent={() => (
+                <>
+                  {isLoading ? (
+                    <ActivityIndicator
+                      style={{ marginTop: DEVICE_HEIGHT * 0.25 }}
+                      size="large"
+                      color={colors.primary}
                     />
-                  )
-                }
-              />
-            }
-          </>
+                  ) : (
+                    <HomeHeader
+                      queryHandler={queryHandler}
+                      selectedFilter={categiroy}
+                      categiroyHandler={categiroyHandler}
+                    />
+                  )}
+                </>
+              )}
+              ListFooterComponent={() =>
+                isLoading ? (
+                  <View></View>
+                ) : (
+                  <Footer
+                    totalItems={course.length}
+                    itemsPerPage={10}
+                    goToPrevious={goToPrevious}
+                    goToNext={goToNext}
+                    currentPageNumber={currentPage}
+                    goToClickedPageNumber={paginate}
+                  />
+                )
+              }
+            />
+          }
         </View>
       </Container>
     </SafeAreaView>

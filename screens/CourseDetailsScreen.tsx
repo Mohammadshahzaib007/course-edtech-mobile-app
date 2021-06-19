@@ -1,25 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
   SafeAreaView,
   View,
-  Dimensions,
   ImageBackground,
 } from "react-native";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
-import IconButton from "../components/UI/IconButton";
-import { Ionicons } from "@expo/vector-icons";
+
 import Typography from "../components/UI/Typography";
 import PriceCard from "../components/UI/PriceCard";
 import CustomButton from "../components/UI/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
 import { courses } from "../data/data";
-import { Course } from "../types/types";
+import { Course, CourseDetails } from "../types/types";
 import CommonHeader from "../components/UI/CommonHeader";
 import Container from "../components/UI/Container";
+import { axios } from "../http/http";
+import InstructorCard from "../components/InstructorCard";
 
-const DEVICE_WIDTH = Dimensions.get("window").width;
 
 type ParamsType = {
   CourseDetailsScreen: {
@@ -29,11 +27,33 @@ type ParamsType = {
 
 const CourseDetailsScreen = () => {
   const { params } = useRoute<RouteProp<ParamsType, "CourseDetailsScreen">>();
-  const navigation = useNavigation();
-
   //Id of the course that has to be shown
   const { courseId } = params;
 
+  const navigation = useNavigation();
+
+  const [courseDetails, setCourseDetails] = useState<CourseDetails>(
+    {} as CourseDetails
+  );
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      try {
+        const response = await axios.get<CourseDetails>(`/courses/${courseId}`);
+        const fetchedCourseDetails = response.data;
+        setCourseDetails(fetchedCourseDetails);
+      } catch (error) {
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCourseDetails();
+    return () => {};
+  }, [courseId]);
+
+  console.log("selected course", courseId);
   const course = courses.find((item) => item.id === courseId) as Course;
 
   return (
@@ -41,10 +61,7 @@ const CourseDetailsScreen = () => {
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* HEADER */}
-          <CommonHeader
-            title={course.courseTitle}
-            onPress={() => navigation.navigate("Home")}
-          />
+          <CommonHeader title="" onPress={() => navigation.navigate("Home")} />
 
           {/* BACKGROUND IMAGE CONTAINER */}
           <View style={{ width: "100%" }}>
@@ -52,7 +69,7 @@ const CourseDetailsScreen = () => {
               style={styles.image}
               resizeMode="cover"
               source={{
-                uri: course?.thumbnailUrl,
+                uri: courseDetails.image_480x270,
               }}
             ></ImageBackground>
           </View>
@@ -65,26 +82,33 @@ const CourseDetailsScreen = () => {
               alignItems: "flex-end",
             }}
           >
-            <PriceCard style={{ margin: 0 }} price={course?.price} />
+            <PriceCard
+              style={{ margin: 0 }}
+              price={courseDetails.price_detail?.price_string}
+            />
           </View>
 
           {/* TEXT CONTAINER */}
           <View style={{ width: "100%" }}>
-            <Typography variant="heading1">About the course</Typography>
-
-            <Typography
-              variant="paragraphMedium"
-              style={{ marginTop: 4, marginBottom: 16 }}
-            >
-              {course?.aboutTheCourse}
-            </Typography>
-
             <Typography variant="heading1" style={{ marginBottom: 4 }}>
-              Duration
+              Title
             </Typography>
-            <Typography variant="paragraphMedium">
-              {course?.courseDuration}
+            <Typography variant="heading2" style={{ marginBottom: 32 }}>
+              {courseDetails.title}
             </Typography>
+
+            <Typography variant="heading1">About the instructors</Typography>
+
+            <View style={{ width: "100%", marginBottom: 16 }}>
+              {courseDetails?.visible_instructors?.map((instructor, i) => (
+                <InstructorCard
+                  key={i}
+                  instructorImgUrl={instructor.image_50x50}
+                  instructorName={instructor.name}
+                  jobTitle={instructor.job_title}
+                />
+              ))}
+            </View>
           </View>
         </ScrollView>
 
